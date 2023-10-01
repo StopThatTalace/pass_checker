@@ -19,7 +19,37 @@ def check_password_strength():
         else:
             special_count += 1
 
+    if lower_count >= 1:
+        strength += 1
+    if upper_count >= 1:
+        strength += 1
+    if num_count >= 1:
+        strength += 1
+    if wspace_count >= 1:
+        strength += 1
+    if special_count >= 1:
+        strength += 1
 
+    if strength <= 1:
+        remarks = ('Ouch.. your password isn\'t that strong, change it as soon as possible.')
+    elif strength == 2:
+        remarks = ('Hmm your password is steal weak, change it as soon as possible.')
+    elif strength == 4:
+        remarks = ('Okay, why not! But to be honest it can be much better, let\'s make a safer password!')
+    elif strength == 8:
+        remarks = ('Here\'s a password that can be hard to guess, you are on the right way!')
+    elif strength == 16:
+        remarks = ('Wow... that\'s a pretty strong password, '
+                   'you have something to hide or what?')
+
+    print('So.. your password has:')
+    print(f'{lower_count} lowercase letters')
+    print(f'{upper_count} uppercase letters')
+    print(f'{num_count} digits')
+    print(f'{wspace_count} whitespaces')
+    print(f'{special_count} special characters')
+    print(f'Password Score : {strength / 5} out of 5')
+    print(f'Remarks: {remarks}')
 
 if __name__ == '__main__':
     print('Welcome to Password Strength Checker')
