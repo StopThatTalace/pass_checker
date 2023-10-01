@@ -1,8 +1,9 @@
 import string
 import getpass
 
+
 def check_password_strength():
-    password = getpass.getpass('Enter your password:')
+    password = getpass.getpass('Enter the password: ')
     strength = 0
     remarks = ''
     lower_count = upper_count = num_count = wspace_count = special_count = 0
@@ -30,44 +31,52 @@ def check_password_strength():
     if special_count >= 1:
         strength += 1
 
-    if strength <= 1:
-        remarks = ('Ouch.. your password isn\'t that strong, change it as soon as possible.')
+    if strength == 1:
+        remarks = ('That\'s a very bad password.'
+            ' Change it as soon as possible.')
     elif strength == 2:
-        remarks = ('Hmm your password is steal weak, change it as soon as possible.')
+        remarks = ('That\'s a weak password.'
+            ' You should consider using a tougher password.')
+    elif strength == 3:
+        remarks = 'Your password is okay, but it can be improved.'
     elif strength == 4:
-        remarks = ('Okay, why not! But to be honest it can be much better, let\'s make a safer password!')
-    elif strength == 8:
-        remarks = ('Here\'s a password that can be hard to guess, you are on the right way!')
-    elif strength == 16:
-        remarks = ('Wow... that\'s a pretty strong password, '
-                   'you have something to hide or what?')
+        remarks = ('Your password is hard to guess.'
+            ' But you could make it even more secure.')
+    elif strength == 5:
+        remarks = ('Now that\'s one hell of a strong password!!!'
+            ' Hackers don\'t have a chance guessing that password!')
 
-    print('So.. your password has:')
+    print('Your password has:-')
     print(f'{lower_count} lowercase letters')
     print(f'{upper_count} uppercase letters')
     print(f'{num_count} digits')
     print(f'{wspace_count} whitespaces')
     print(f'{special_count} special characters')
-    print(f'Password Score : {strength / 5} out of 5')
+    print(f'Password Score: {strength / 5}')
     print(f'Remarks: {remarks}')
 
 
-def check_pwd(another_pw = False):
+def check_pwd(another_pw=False):
     valid = False
-    if another_pw:
-        choice = input('Do you want to check another password ? (y/n) :')
-    else:
-        choice = input('Do you want to check your password ? (y/n):')
-
     while not valid:
+        if another_pw:
+            choice = input(
+                'Do you want to check another password\'s strength (y/n) : ')
+        else:
+            choice = input(
+                'Do you want to check your password\'s strength (y/n) : ')
+
         if choice.lower() == 'y':
             return True
         elif choice.lower() == 'n':
-            print('Existing...')
+            print('Exiting...')
             return False
         else:
-            print('Invalid input.. please retry again. \n')
-
+            print('Invalid input...please try again.\n')
 
 if __name__ == '__main__':
-    print('Welcome to Password Strength Checker')
+    print('===== Welcome to Password Strength Checker =====')
+    check_pw = check_pwd()
+    while check_pw:
+        check_password_strength()
+        check_pw = check_pwd(True)
