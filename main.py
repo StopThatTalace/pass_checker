@@ -51,5 +51,23 @@ def check_password_strength():
     print(f'Password Score : {strength / 5} out of 5')
     print(f'Remarks: {remarks}')
 
+
+def check_pwd(another_pw = False):
+    valid = False
+    if another_pw:
+        choice = input('Do you want to check another password ? (y/n) :')
+    else:
+        choice = input('Do you want to check your password ? (y/n):')
+
+    while not valid:
+        if choice.lower() == 'y':
+            return True
+        elif choice.lower() == 'n':
+            print('Existing...')
+            return False
+        else:
+            print('Invalid input.. please retry again. \n')
+
+
 if __name__ == '__main__':
     print('Welcome to Password Strength Checker')
